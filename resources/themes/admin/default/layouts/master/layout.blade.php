@@ -34,7 +34,7 @@
 </aside>
 @yield('content')
 
-<footer>
+<footer class="main-footer">
     @include('master.partials.footer')
 </footer>
 <!-- jQuery -->
