@@ -4,6 +4,7 @@
 namespace App\Providers;
 
 
+use Illuminate\Http\Testing\MimeType;
 use Illuminate\Support\ServiceProvider;
 
 class ThemeServiceProvider extends ServiceProvider
@@ -15,7 +16,7 @@ class ThemeServiceProvider extends ServiceProvider
         if(file_exists($filePath)) {
             $fileStat = stat($filePath);
             $filePathInfo = pathinfo($filePath);
-            $filePathInfo['mime'] = finfo_file(finfo_open(FILEINFO_MIME_TYPE), $filePath);
+            $filePathInfo['mime'] = MimeType::from($filePath);;
             $filePathInfo['size'] = $fileStat[7];
             $filePathInfo['mtime'] = $fileStat[9];
 
@@ -30,19 +31,19 @@ class ThemeServiceProvider extends ServiceProvider
                 $fileChunkSize = 1024 * 1024;
                 $lengthStart = 0;
                 $lengthEnd = $filePathInfo['size'];
-                if ( $httpRange = (isset($_SERVER['HTTP_RANGE']) ? $_SERVER['HTTP_RANGE'] : false)) {
-                    if (preg_match('/bytes=\h*(\d+)-(\d*)[\D.*]?/i', $httpRange, $matches)) {
-                        $lengthStart = intval($matches[0]);
-                        if (!empty($matches[1])) {
-                            $lengthEnd = intval($matches[1]);
-                        }
-                    }
-                }
 
-                if ($lengthStart > 0 || $lengthEnd < $filePathInfo['size']) {
-                    header('HTTP/1.0 206 Partial Content');
-                } else {
-                    header('HTTP/1.0 200 OK');
+                if (isset($_SERVER['HTTP_RANGE'])) {
+                    // if the HTTP_RANGE header is set we're dealing with partial content
+                    // find the requested range
+                    // this might be too simplistic, apparently the client can request
+                    // multiple ranges, which can become pretty complex, so ignore it for now
+                    preg_match('/bytes=(\d+)-(\d+)?/', $_SERVER['HTTP_RANGE'], $matches);
+                    $offset = intval($matches[1]);
+                    $end = $matches[2] || $matches[2] === '0' ? intval($matches[2]) : $lengthEnd - 1;
+                    $length = $end + 1 - $offset;
+                    // output the right headers for partial content
+                    header('HTTP/1.1 206 Partial Content');
+                    header("Content-Range: bytes $offset-$end/$lengthEnd");
                 }
 
                 header('Content-Type: ' . $filePathInfo['mime']);
@@ -55,7 +56,7 @@ class ThemeServiceProvider extends ServiceProvider
                 header('Connection: close');
 
                 $lengthCurrent = $lengthStart;
-                $fileHandle = fopen($filePath);
+                $fileHandle = fopen($filePath, 'r');
                 fseek($fileHandle, $lengthStart, 0);
 
                 $buffer = '';

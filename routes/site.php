@@ -1,7 +1,5 @@
 <?php
 
-use App\Http\Controllers\Blog;
-use App\Http\Controllers\BlogPost;
 use Illuminate\Support\Facades\Route;
 use App\Providers\ThemeServiceProvider;
 use App\Http\Controllers\Site;
