@@ -192,36 +192,36 @@
                 <p>Sit sint consectetur velit quisquam cupiditate impedit suscipit alias</p>
             </div>
 
-{{--            <ul id="portfolio-flters" class="d-flex justify-content-center">--}}
-{{--                <li data-filter="*" class="filter-active">All</li>--}}
-{{--                @foreach($categories as $category)--}}
-{{--                    <li data-filter=".filter-{{md5($category->name)}}">{{$category->name}}</li>--}}
-{{--                @endforeach--}}
-{{--            </ul>--}}
+            <ul id="portfolio-flters" class="d-flex justify-content-center">
+                <li data-filter="*" class="filter-active">All</li>
+                @foreach($categories as $category)
+                    <li data-filter=".filter-{{($category->name)}}">{{$category->name}}</li>
+                @endforeach
+            </ul>
 
-{{--            <div class="row portfolio-container">--}}
-{{--                @foreach($portfolios as $portfolio)--}}
-{{--                    <div class="col-lg-4 col-md-6 portfolio-item filter-{{md5($portfolio->category->name)}}">--}}
-{{--                        @if($portfolio->image)--}}
-{{--                            <div class="portfolio-img"><img src="{{$portfolio->image->image_name}}" class="img-fluid" alt=""></div>--}}
-{{--                        @else--}}
-{{--                            <div class="portfolio-img"><img src="https://picsum.photos/300/200" class="img-fluid" alt=""></div>--}}
-{{--                        @endif--}}
-{{--                        <div class="portfolio-info">--}}
-{{--                            <h4>{{$portfolio->title}}</h4>--}}
-{{--                            <p>{{$portfolio->category->name}}</p>--}}
-{{--                            @if($portfolio->image)--}}
-{{--                                <a href="{{$portfolio->image->image_name}}" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="{{$portfolio->title}}"><i class="bx bx-plus"></i></a>--}}
-{{--                            @else--}}
-{{--                                <a href="https://picsum.photos/200/300" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="{{$portfolio->title}}"><i class="bx bx-plus"></i></a>--}}
-{{--                            @endif--}}
-{{--                            @if($portfolio->link)--}}
-{{--                                <a href="{{$portfolio->link}}" target="_blank" class="details-link" title="More Details"><i class="bx bx-link"></i></a>--}}
-{{--                            @endif--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                @endforeach--}}
-{{--            </div>--}}
+            <div class="row portfolio-container">
+                @foreach($portfolios as $portfolio)
+                    <div class="col-lg-4 col-md-6 portfolio-item filter-{{($portfolio->category->name)}}">
+                        @if($portfolio->image)
+                            <div class="portfolio-img"><img src="{{$portfolio->image->image_name}}" class="img-fluid" alt=""></div>
+                        @else
+                            <div class="portfolio-img"><img src="https://picsum.photos/300/200" class="img-fluid" alt=""></div>
+                        @endif
+                        <div class="portfolio-info">
+                            <h4>{{$portfolio->title}}</h4>
+                            <p>{{$portfolio->category->name}}</p>
+                            @if($portfolio->image)
+                                <a href="{{$portfolio->image->image_name}}" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="{{$portfolio->title}}"><i class="bx bx-plus"></i></a>
+                            @else
+                                <a href="https://picsum.photos/200/300" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="{{$portfolio->title}}"><i class="bx bx-plus"></i></a>
+                            @endif
+                            @if($portfolio->link)
+                                <a href="{{$portfolio->link}}" target="_blank" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+                            @endif
+                        </div>
+                    </div>
+                @endforeach
+            </div>
 
         </div>
     </section><!-- End My Portfolio Section -->

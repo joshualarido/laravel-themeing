@@ -25,12 +25,12 @@ class Posts extends Controller
         ]);
 
         if(empty($request->id)) {
-            \App\Models\Posts::create($request->all());
+            \App\Models\Post::create($request->all());
 
             return redirect()->route('posts.index')
                 ->with('success', 'Success create a new post: ' . $request->offsetGet('title'));
         } else {
-            \App\Models\Posts::find($request->id)->update($request->all());
+            \App\Models\Post::find($request->id)->update($request->all());
 
             return redirect()->route('posts.index')
                 ->with('success', 'Success update post: ' . $request->offsetGet('title'));
@@ -39,7 +39,7 @@ class Posts extends Controller
 
     public function delete($id)
     {
-        $post = \App\Models\Posts::find($id);
+        $post = \App\Models\Post::find($id);
 
         if($post->delete()) {
             return redirect()->route('posts.index')

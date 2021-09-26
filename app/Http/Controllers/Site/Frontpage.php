@@ -1,7 +1,9 @@
 <?php
 namespace App\Http\Controllers\Site;
 
-use App\Models\Posts;
+use App\Models\Category;
+use App\Models\Portfolio;
+use App\Models\Post;
 
 /**
  * Class Frontpage
@@ -16,6 +18,12 @@ class Frontpage extends Controller
      */
     public function index()
     {
-        return view('home');
+        $portfolios = Portfolio::all();
+        $categories = Category::all();
+
+        return view('home', [
+            'portfolios' => $portfolios,
+            'categories' => $categories,
+        ]);
     }
 }
