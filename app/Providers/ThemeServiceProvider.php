@@ -30,8 +30,7 @@ class ThemeServiceProvider extends ServiceProvider
                 $fileChunkSize = 1024 * 1024;
                 $lengthStart = 0;
                 $lengthEnd = $filePathInfo['size'];
-
-                if ($httpRange = $_SERVER['HTTP_RANGE']) {
+                if ( $httpRange = (isset($_SERVER['HTTP_RANGE']) ? $_SERVER['HTTP_RANGE'] : false)) {
                     if (preg_match('/bytes=\h*(\d+)-(\d*)[\D.*]?/i', $httpRange, $matches)) {
                         $lengthStart = intval($matches[0]);
                         if (!empty($matches[1])) {

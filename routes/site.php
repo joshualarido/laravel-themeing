@@ -11,7 +11,7 @@ use App\Http\Controllers\Admin;
  */
 Route::get('/themes/{filePath}', function($filePath){
     ThemeServiceProvider::serveAsset('themes/site/' . $filePath);
-})->where('filePath', '([A-z0-9\/_.]+)?');
+})->where('filePath', '([A-z0-9\/_\-\.]+)?');
 
 Route::get('/', [Site\Frontpage::class, 'index'])->name('home');
 
