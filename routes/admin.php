@@ -16,3 +16,5 @@ Route::prefix('/posts')->group(function () {
     Route::get('/update', [Admin\Posts::class, 'form']);
     Route::any('/store', [Admin\Posts::class, 'form']);
 });
+
+Route::get('/', [Admin\Posts::class, 'index']);

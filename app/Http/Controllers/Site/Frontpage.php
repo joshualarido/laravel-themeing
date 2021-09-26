@@ -16,6 +16,6 @@ class Frontpage extends Controller
      */
     public function index()
     {
-        return view('frontpage');
+        return view('home');
     }
 }

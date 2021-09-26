@@ -20,3 +20,4 @@ class Controller extends \App\Http\Controllers\Controller
         View::addLocation(base_path() . '/resources/themes/site/' . $theme . '/views/');
     }
 }
+
