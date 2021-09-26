@@ -32,7 +32,7 @@
                                         </ul>
                                     </div>
                                     <div class="col-6 text-right">
-                                        <a href="/blogpost/{{$post->id}}" class="btn btn-gray-transparent btn-animated">Read More<i class="fa fa-arrow-right"></i></a>
+                                        <a href="/blog/detail/{{$post->id}}" class="btn btn-gray-transparent btn-animated">Read More<i class="fa fa-arrow-right"></i></a>
                                     </div>
                                 </div>
                             </div>

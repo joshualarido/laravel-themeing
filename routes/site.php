@@ -1,10 +1,10 @@
 <?php
 
-use App\Http\Controllers\BlogListController;
+use App\Http\Controllers\Blog;
+use App\Http\Controllers\BlogPost;
 use Illuminate\Support\Facades\Route;
 use App\Providers\ThemeServiceProvider;
 use App\Http\Controllers\Site;
-use App\Http\Controllers\Admin;
 
 /**
  * Site Routes
@@ -15,6 +15,6 @@ Route::get('/themes/{filePath}', function($filePath){
 
 Route::get('/', [Site\Frontpage::class, 'index'])->name('home');
 
-Route::get('/blog', [Site\BlogController::class, 'index'])->name('blog');
+Route::get('/blog', [Site\Blog::class, 'index'])->name('blog');
 
-Route::get('/blogpost/{id}', [Site\BlogPostController::class, 'index']);
+Route::get('/blog/detail/{id}', [Site\Blog::class, 'detail'])->name('blog_detail');
